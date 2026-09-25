@@ -1,0 +1,14 @@
+{
+  "title": "UsedQ — Buy Used. Sell Smart.",
+  "description": "Easily design and launch personalized websites using custom logos, tailored for businesses and individuals seeking a professional online presence.",
+  "icons": {
+    "icon": "/favicon.png"
+  },
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
