@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { categories } from '../data/mockData';
 import CategoryIcon from './CategoryIcon';
-import { X, Search, ChevronRight, SlidersHorizontal, Grid, ArrowRight } from 'lucide-react';
+import { X, ChevronRight, SlidersHorizontal, Grid, ArrowRight } from 'lucide-react';
 
 interface CategoryFilterMenuProps {
   isOpen: boolean;
@@ -73,7 +73,6 @@ export default function CategoryFilterMenu({
         {/* Search & Filter Input */}
         <div className="p-4 bg-[#F7F7F5] border-b border-[#E7E7E3]">
           <div className="flex items-center bg-white border border-[#E7E7E3] rounded-2xl px-3.5 py-2.5 shadow-2xs focus-within:border-[#FDB209] transition-colors">
-            <Search className="w-4 h-4 text-gray-400 mr-2 shrink-0" />
             <input
               type="text"
               placeholder="Search category or subcategory (e.g. iPhones, Laptops, Cars)..."

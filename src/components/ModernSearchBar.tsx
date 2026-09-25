@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface ModernSearchBarProps {
   initialQuery?: string;
@@ -39,13 +39,8 @@ export default function ModernSearchBar({
           : 'bg-white/80 backdrop-blur-md border-[#E7E7E3] p-1 shadow-md focus-within:border-[#FDB209]/80 focus-within:bg-white'
       } ${className}`}
     >
-      {/* Left Search Icon */}
-      <div className="pl-4 sm:pl-5 pr-2 flex items-center justify-center text-gray-400 shrink-0">
-        <Search className="w-5 h-5 stroke-[2.2] text-[#FDB209]" />
-      </div>
-
       {/* Segment 2: Search Input Field */}
-      <div className="flex-1 flex items-center">
+      <div className="flex-1 flex items-center pl-3 sm:pl-4">
         <input
           type="text"
           value={query}
@@ -66,15 +61,14 @@ export default function ModernSearchBar({
         )}
       </div>
 
-      {/* Segment 3: Circular / Rounded Action Search Button */}
+      {/* Segment 3: Action Search Button */}
       <button
         type="submit"
         className={`brand-gradient text-[#12151A] font-extrabold rounded-full transition-all flex items-center justify-center shrink-0 shadow-md hover:opacity-95 active:scale-95 ${
-          isHero ? 'px-7 py-3 gap-2 text-base' : 'w-9 h-9 md:w-auto md:px-5 md:py-2 gap-1.5 text-xs md:text-sm'
+          isHero ? 'px-7 py-3 text-base' : 'px-4 py-2 text-xs md:text-sm'
         }`}
       >
-        <Search className="w-4 h-4 shrink-0 stroke-[2.5]" />
-        <span className={isHero ? 'inline' : 'hidden md:inline'}>Search</span>
+        <span>Search</span>
       </button>
     </form>
   );

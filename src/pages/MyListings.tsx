@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import {
   ClipboardList, Package, Eye, Heart, MessageSquare, Plus, Edit, Trash2,
-  CheckCircle2, DollarSign, TrendingUp, Tag, AlertCircle, X, Search, RefreshCw
+  CheckCircle2, DollarSign, TrendingUp, Tag, AlertCircle, X, RefreshCw
 } from 'lucide-react';
 
 type MyListingItem = typeof initialListings[number];
@@ -179,8 +179,7 @@ export default function MyListings() {
           </div>
 
           {/* Quick Filter Search */}
-          <div className="flex items-center bg-[#F7F7F5] border border-[#E7E7E3] rounded-xl px-3 gap-2 focus-within:border-[#FDB209]">
-            <Search className="w-4 h-4 text-gray-400 shrink-0" />
+          <div className="flex items-center bg-[#F7F7F5] border border-[#E7E7E3] rounded-xl px-3 focus-within:border-[#FDB209]">
             <input
               type="text"
               placeholder="Search your listings by title..."

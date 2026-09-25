@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, X, TrendingUp, Sparkles } from 'lucide-react';
+import { MapPin, X, TrendingUp, Sparkles } from 'lucide-react';
 
 interface SearchBarProps {
   initialQuery?: string;
@@ -77,10 +77,7 @@ export default function SearchBar({
             : 'p-1 bg-[#F7F7F5] border border-[#E7E7E3] text-[#12151A]'
         }`}
       >
-        {/* Search Icon */}
-        <div className={`flex items-center pl-3.5 ${isHero ? 'pl-4' : ''}`}>
-          <Search className={`w-4 h-4 md:w-5 md:h-5 ${dark || isHero ? 'text-gray-400' : 'text-gray-400'}`} />
-        </div>
+
 
         {/* Text Input */}
         <input

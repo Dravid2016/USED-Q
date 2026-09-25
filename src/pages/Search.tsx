@@ -231,10 +231,7 @@ export default function Search() {
       {/* Search bar (mobile) */}
       <div className="md:hidden border-b border-[#E7E7E3] bg-white px-4 py-3 sticky top-14 z-20">
         <form onSubmit={handleSearch} className="flex gap-2">
-          <div className="flex-1 flex items-center bg-[#F7F7F5] border border-[#E7E7E3] rounded-xl px-3 gap-2 focus-within:border-[#FDB209] transition-colors">
-            <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+          <div className="flex-1 flex items-center bg-[#F7F7F5] border border-[#E7E7E3] rounded-xl px-3 focus-within:border-[#FDB209] transition-colors">
             <input
               type="text"
               value={query}
