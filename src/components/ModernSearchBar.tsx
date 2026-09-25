@@ -111,8 +111,8 @@ export default function ModernSearchBar({
         </>
       ) : (
         /* Left Search Icon when Location Pill is removed */
-        <div className="pl-3.5 pr-1 flex items-center justify-center text-gray-400 shrink-0">
-          <Search className="w-4 h-4 md:w-5 md:h-5 stroke-[2] text-[#FDB209]" />
+        <div className="pl-4 sm:pl-5 pr-2 flex items-center justify-center text-gray-400 shrink-0">
+          <Search className="w-5 h-5 stroke-[2.2] text-[#FDB209]" />
         </div>
       )}
 
@@ -124,7 +124,7 @@ export default function ModernSearchBar({
           onChange={(e) => setQuery(e.target.value)}
           placeholder={isHero ? 'Search phones, bikes, laptops, electronics...' : 'Search items nearby...'}
           className={`w-full bg-transparent outline-none font-medium placeholder:text-gray-400 ${
-            isHero ? 'py-2 px-1 text-base sm:text-lg text-[#12151A]' : 'py-1 text-sm text-[#12151A]'
+            isHero ? 'py-2 px-2 text-base sm:text-lg text-[#12151A]' : 'py-1 px-1 text-sm text-[#12151A]'
           } ${dark ? 'text-white' : 'text-[#12151A]'}`}
         />
         {query && (

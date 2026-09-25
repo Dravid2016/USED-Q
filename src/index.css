@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
 @import 'tailwindcss';
 
 @theme inline {
@@ -10,7 +10,22 @@
   --color-border: #E7E7E3;
 
   --font-sans: 'Inter', system-ui, sans-serif;
+  --font-brand: 'Outfit', 'Plus Jakarta Sans', 'Inter', sans-serif;
 }
+
+/* Brand Logo Typography Classes */
+.font-brand-logo {
+  font-family: 'Outfit', 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.font-brand-subtext {
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+}
+
 
 :root {
   --background: #FFFFFF;
@@ -68,11 +83,46 @@ body {
   background: linear-gradient(135deg, #FDB209, #E98B00);
 }
 
+.brand-gradient-hover {
+  background: linear-gradient(135deg, #FFBE24, #FDB209);
+}
+
 .brand-gradient-text {
   background: linear-gradient(135deg, #FDB209, #E98B00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.glass-header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-header-dark {
+  background: rgba(11, 11, 13, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pop-in {
+  animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Line clamp utilities */
@@ -83,3 +133,4 @@ body {
 .transition-base {
   transition: all 0.2s ease;
 }
+

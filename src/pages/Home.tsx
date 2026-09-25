@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { listings, categories } from '../data/mockData';
 import ProductCard, { ProductCardSkeleton } from '../components/ProductCard';
@@ -6,13 +6,16 @@ import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import Footer from '../components/Footer';
 import CategoryIcon from '../components/CategoryIcon';
-import { ShieldCheck, CheckCircle2, Flag, Users } from 'lucide-react';
+import CategoryFilterMenu from '../components/CategoryFilterMenu';
+import { SlidersHorizontal, Grid, Filter, X, ShieldCheck, CheckCircle2, Flag, Users } from 'lucide-react';
 
 import ModernSearchBar from '../components/ModernSearchBar';
 import uqMark from '../assets/uq-logo-mark.png';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const [loading] = useState(false);
   const navigate = useNavigate();
 
@@ -21,29 +24,39 @@ export default function Home() {
     if (searchQuery.trim()) navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
   };
 
-  const recommended = listings.slice(0, 4);
-  const recent = listings.slice(2, 8);
-  const nearby = listings.slice(4, 8);
+  // Filter listings based on active category selection on Home page
+  const filteredListings = useMemo(() => {
+    if (!selectedCategory) return listings;
+    const targetCat = categories.find(c => c.id === selectedCategory || c.name.toLowerCase() === selectedCategory.toLowerCase());
+    return listings.filter(l => targetCat ? l.category === targetCat.name : l.category.toLowerCase().includes(selectedCategory.toLowerCase()));
+  }, [selectedCategory]);
+
+  const recommended = filteredListings.slice(0, 4);
+  const recent = filteredListings.slice(2, 8);
+  const nearby = filteredListings.slice(4, 8);
+
 
   return (
     <div className="min-h-screen bg-white text-[#12151A] flex flex-col font-sans">
+      {/* Category Filter Menu Modal */}
+      <CategoryFilterMenu
+        isOpen={showCategoryMenu}
+        onClose={() => setShowCategoryMenu(false)}
+        selectedCategoryId={selectedCategory}
+        onSelectCategory={(catId) => {
+          setSelectedCategory(catId);
+          setShowCategoryMenu(false);
+        }}
+      />
+
       {/* HERO & HEADER CONTAINER - RICH BRAND GRADIENT SHADES & CENTERED ALIGNMENT */}
       <div className="relative bg-gradient-to-br from-[#FFFCE8] via-[#FFF3D1] to-[#FCEEC7] text-[#12151A] overflow-hidden flex flex-col border-b border-[#FDB209]/30 min-h-[calc(100vh-64px)] justify-between">
         {/* Rich Multi-Layered Brand Gradient Shades & Glow Accents */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-          {/* Radiant Top-Center Sunburst Glow */}
           <div className="absolute -top-28 left-1/2 -translate-x-1/2 w-[900px] h-[650px] bg-[radial-gradient(ellipse_at_top,rgba(253,178,9,0.45),transparent_65%)] pointer-events-none" />
-          
-          {/* Top-Left Vibrant Amber Bloom */}
           <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-br from-[#FDB209]/30 via-[#E98B00]/20 to-transparent rounded-full blur-3xl pointer-events-none" />
-          
-          {/* Bottom-Right Golden Sunrise Glow */}
           <div className="absolute -bottom-32 -right-32 w-[600px] h-[600px] bg-gradient-to-tl from-[#FDB209]/35 via-[#FFBE24]/25 to-transparent rounded-full blur-3xl pointer-events-none" />
-          
-          {/* Center Subtle Golden Focus Aura */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#FDB209]/15 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Micro-Dot Brand Texture Overlay */}
           <div className="absolute inset-0 bg-[radial-gradient(#FDB209_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
         </div>
 
@@ -59,7 +72,7 @@ export default function Home() {
               
               {/* Centered Logo Emblem & Brand Text */}
               <div 
-                className="mb-6 flex flex-col sm:flex-row items-center justify-center gap-3 cursor-pointer group transition-transform duration-300 hover:scale-105" 
+                className="mb-6 flex flex-col sm:flex-row items-center justify-center gap-3.5 cursor-pointer group transition-transform duration-300 hover:scale-105" 
                 onClick={() => navigate('/')}
               >
                 <img
@@ -67,25 +80,37 @@ export default function Home() {
                   alt="USED Q Logo Emblem"
                   className="h-20 sm:h-28 md:h-32 w-auto object-contain drop-shadow-sm"
                 />
-                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#12151A] leading-none font-sans">
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left select-none">
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-brand-logo text-[#12151A] leading-none tracking-tight">
                     Used<span className="text-[#FDB209]">Q</span>
                   </span>
-                  <span className="text-[10px] sm:text-xs font-extrabold text-[#12151A]/80 uppercase tracking-[0.18em] mt-1.5 flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
-                    <span>E-COMMERCE MARKETPLACE</span>
-                    <span className="text-[#FDB209] font-black">•</span>
-                    <span>BUY</span>
-                    <span className="text-[#FDB209] font-black">•</span>
-                    <span>SELL</span>
-                    <span className="text-[#FDB209] font-black">•</span>
-                    <span>TRADE</span>
-                  </span>
+                  <div className="flex flex-col items-center sm:items-start mt-2 space-y-1">
+                    <span className="text-[10px] sm:text-xs font-brand-subtext text-[#12151A]/70 uppercase tracking-[0.22em]">
+                      E-COMMERCE MARKETPLACE
+                    </span>
+                    <span className="text-[11px] sm:text-xs font-brand-subtext text-[#12151A] uppercase tracking-[0.3em] flex items-center justify-center sm:justify-start gap-2">
+                      <span>BUY</span>
+                      <span className="text-[#FDB209] font-black text-sm leading-none">•</span>
+                      <span>SELL</span>
+                      <span className="text-[#FDB209] font-black text-sm leading-none">•</span>
+                      <span>TRADE</span>
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* Marketplace Badge */}
-              <div className="inline-flex items-center gap-1.5 brand-gradient text-[#12151A] text-[11px] sm:text-xs font-black px-4.5 py-1.5 rounded-full mb-6 shadow-sm tracking-wider uppercase border border-[#FDB209]/40">
-                <span>India's Premier Verified Marketplace</span>
+              {/* Marketplace Badge & Category Menu Button */}
+              <div className="flex items-center gap-2 mb-6 flex-wrap justify-center">
+                <div className="inline-flex items-center gap-1.5 brand-gradient text-[#12151A] text-[11px] sm:text-xs font-black px-4.5 py-1.5 rounded-full shadow-sm tracking-wider uppercase border border-[#FDB209]/40">
+                  <span>India's Premier Verified Marketplace</span>
+                </div>
+                <button
+                  onClick={() => setShowCategoryMenu(true)}
+                  className="inline-flex items-center gap-1.5 bg-[#12151A] text-white text-[11px] sm:text-xs font-bold px-4 py-1.5 rounded-full shadow-sm hover:bg-black transition-all cursor-pointer"
+                >
+                  <Grid className="w-3.5 h-3.5 text-[#FDB209]" />
+                  <span>Category Menu ☰</span>
+                </button>
               </div>
               
               {/* Main Headline */}
@@ -100,7 +125,7 @@ export default function Home() {
 
               {/* Hero Search Bar Component */}
               <div className="w-full max-w-2xl mx-auto">
-                <ModernSearchBar initialQuery={searchQuery} variant="hero" showLocation={true} />
+                <ModernSearchBar initialQuery={searchQuery} variant="hero" showLocation={false} />
               </div>
 
               {/* Quick Filter Pill Buttons */}
@@ -122,7 +147,7 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Stats Bar - Perfectly Balanced Grid Alignment */}
+      {/* Stats Bar */}
       <div className="border-b border-[#E7E7E3] bg-[#F7F7F5] py-5">
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center divide-x-0 md:divide-x divide-[#E7E7E3]">
@@ -143,27 +168,96 @@ export default function Home() {
 
       {/* Main Body Content */}
       <main className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pb-24 md:pb-16 w-full flex-1">
-        {/* Popular Categories */}
+        {/* Popular Categories & Filter Menu Section */}
         <section className="mt-12">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
             <div>
               <h2 className="text-xl sm:text-2xl font-bold text-[#12151A] tracking-tight">Popular Categories</h2>
-              <p className="text-xs sm:text-sm text-gray-500">Explore products by category</p>
+              <p className="text-xs sm:text-sm text-gray-500">Explore products by category or open the full menu</p>
             </div>
-            <Link to="/categories" className="text-xs sm:text-sm font-bold text-[#FDB209] hover:underline">View all</Link>
+            
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowCategoryMenu(true)}
+                className="flex items-center gap-1.5 text-xs sm:text-sm font-bold bg-[#12151A] text-white px-4 py-2.5 rounded-xl hover:bg-black transition-colors shadow-2xs"
+              >
+                <SlidersHorizontal className="w-4 h-4 text-[#FDB209]" />
+                <span>Filter Categories Menu</span>
+              </button>
+              <Link to="/search" className="text-xs sm:text-sm font-bold text-[#FDB209] hover:underline px-2 py-1">
+                View all →
+              </Link>
+            </div>
           </div>
+
+          {/* Interactive Category Filter Ribbon */}
+          <div className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none">
+            <button
+              onClick={() => setSelectedCategory('')}
+              className={`px-4 py-2 text-xs font-bold rounded-xl transition-all shrink-0 flex items-center gap-1.5 ${
+                !selectedCategory
+                  ? 'brand-gradient text-[#12151A] shadow-xs'
+                  : 'bg-[#F7F7F5] border border-[#E7E7E3] text-gray-700 hover:border-[#FDB209]'
+              }`}
+            >
+              <Grid className="w-3.5 h-3.5" />
+              All Categories
+            </button>
+            {categories.map(cat => {
+              const isSelected = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(isSelected ? '' : cat.id)}
+                  className={`px-3.5 py-2 text-xs font-bold rounded-xl transition-all shrink-0 flex items-center gap-1.5 ${
+                    isSelected
+                      ? 'bg-[#12151A] text-white shadow-xs border border-[#12151A]'
+                      : 'bg-[#F7F7F5] border border-[#E7E7E3] text-gray-700 hover:border-[#FDB209]'
+                  }`}
+                >
+                  <CategoryIcon id={cat.id} className="w-3.5 h-3.5" />
+                  <span>{cat.name}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Category Filter Badge */}
+          {selectedCategory && (
+            <div className="bg-[#FDB209]/15 border border-[#FDB209]/30 rounded-2xl p-3.5 mb-6 flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs text-[#12151A] font-semibold">
+                <Filter className="w-4 h-4 text-[#E98B00]" />
+                <span>Filtered by Category: <strong>{categories.find(c => c.id === selectedCategory)?.name || selectedCategory}</strong> ({filteredListings.length} products found)</span>
+              </div>
+              <button
+                onClick={() => setSelectedCategory('')}
+                className="text-xs font-bold text-red-500 hover:text-red-700 flex items-center gap-1 bg-white px-2.5 py-1 rounded-lg border border-red-100"
+              >
+                <X className="w-3.5 h-3.5" /> Clear Filter
+              </button>
+            </div>
+          )}
+
           <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 gap-3">
             {categories.map(cat => (
-              <Link
+              <button
                 key={cat.id}
-                to={`/search?category=${cat.id}`}
-                className="flex flex-col items-center gap-2 group p-3 rounded-2xl bg-[#F7F7F5] border border-[#E7E7E3] hover:border-[#FDB209] hover:bg-[#FDB209]/10 transition-all duration-200 shadow-2xs hover:-translate-y-0.5"
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`flex flex-col items-center gap-2 group p-3 rounded-2xl transition-all duration-200 shadow-2xs hover:-translate-y-0.5 text-left ${
+                  selectedCategory === cat.id
+                    ? 'bg-[#12151A] text-white border border-[#12151A]'
+                    : 'bg-[#F7F7F5] border border-[#E7E7E3] hover:border-[#FDB209] hover:bg-[#FDB209]/10'
+                }`}
               >
-                <div className="w-11 h-11 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center text-gray-700 group-hover:text-[#FDB209] transition-colors shadow-2xs">
+                <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-colors shadow-2xs ${
+                  selectedCategory === cat.id ? 'bg-[#FDB209] text-[#12151A]' : 'bg-white text-gray-700 group-hover:text-[#FDB209]'
+                }`}>
                   <CategoryIcon id={cat.id} className="w-5 h-5" />
                 </div>
-                <span className="text-[11px] font-semibold text-[#12151A] text-center leading-tight truncate w-full">{cat.name}</span>
-              </Link>
+                <span className={`text-[11px] font-semibold text-center leading-tight truncate w-full ${
+                  selectedCategory === cat.id ? 'text-white font-bold' : 'text-[#12151A]'
+                }`}>{cat.name}</span>
+              </button>
             ))}
           </div>
         </section>
