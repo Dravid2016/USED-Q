@@ -68,11 +68,11 @@ export default function Home() {
                   className="h-20 sm:h-28 md:h-32 w-auto object-contain drop-shadow-sm"
                 />
                 <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#12151A] leading-none">
-                    USED <span className="text-[#FDB209]">Q</span>
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#12151A] leading-none font-sans">
+                    Used<span className="text-[#FDB209]">Q</span>
                   </span>
-                  <span className="text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">
-                    E-Commerce Marketplace
+                  <span className="text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-[0.2em] mt-1.5 flex items-center gap-1.5">
+                    BUY <span className="text-[#FDB209] font-black">•</span> SELL <span className="text-[#FDB209] font-black">•</span> TRADE
                   </span>
                 </div>
               </div>
