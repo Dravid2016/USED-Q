@@ -23,10 +23,14 @@ export default function Header({ searchQuery = '', dark = false, transparent = f
     <header className={`sticky top-0 z-50 transition-colors ${headerBgClass}`}>
       <div className="max-w-[1320px] mx-auto px-4 lg:px-6">
         <div className="flex items-center gap-3.5 h-16">
-          {/* Logo with Curved White Container */}
+          {/* Logo Container */}
           <Link
             to="/"
-            className="shrink-0 flex items-center justify-center px-4 md:px-5 py-1.5 rounded-2xl bg-white hover:bg-white/95 transition-all shadow-md border border-[#E7E7E3]"
+            className={`shrink-0 flex items-center justify-center px-4 md:px-5 py-1.5 rounded-2xl transition-all border ${
+              transparent
+                ? 'bg-white/80 backdrop-blur-md hover:bg-white border-[#E7E7E3]/60 shadow-sm'
+                : 'bg-white hover:bg-white/95 border-[#E7E7E3] shadow-md'
+            }`}
           >
             <img src={logo} alt="UsedQ — Buy, Sell, Trade" className="h-7 md:h-8 w-auto object-contain" />
           </Link>
