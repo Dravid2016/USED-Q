@@ -9,7 +9,6 @@ import CategoryIcon from '../components/CategoryIcon';
 import { ShieldCheck, CheckCircle2, Flag, Users } from 'lucide-react';
 
 import ModernSearchBar from '../components/ModernSearchBar';
-import Silk from '../components/Silk';
 import uqMark from '../assets/uq-logo-mark.png';
 
 export default function Home() {
@@ -28,24 +27,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-[#12151A] flex flex-col">
-      {/* HERO & HEADER CONTAINER WITH REACT BITS SILK BACKGROUND (WHITE & GOLDEN THEME) */}
-      <div className="relative bg-[#FAFAF7] text-[#12151A] overflow-hidden min-h-[520px] flex flex-col border-b border-[#E7E7E3]">
-        {/* React Bits Silk WebGL Canvas - Covers Header & Hero */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-          <Silk
-            speed={3}
-            scale={1.2}
-            color="#FDB209"
-            noiseIntensity={1.2}
-            rotation={0}
-            lightMode={true}
-          />
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#FAFAF7]/20 via-transparent to-[#FAFAF7]/80" />
-        </div>
-
-        {/* Fully Transparent Header floating directly over Beams Canvas */}
+      {/* HERO & HEADER CONTAINER - CLEAN PURE WHITE BACKGROUND */}
+      <div className="relative bg-white text-[#12151A] overflow-hidden min-h-[520px] flex flex-col border-b border-[#E7E7E3]">
+        {/* Header */}
         <div className="relative z-10">
-          <Header transparent />
+          <Header />
         </div>
 
         {/* Hero Content */}
@@ -170,10 +156,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Sell CTA Banner with React Silk Animation in Used Q color palette */}
-        <section className="mt-16 bg-[#12151A] text-white rounded-3xl overflow-hidden relative shadow-xl p-8 md:p-10 border border-white/10">
-          {/* React Silk WebGL Canvas Background */}
-          <Silk color="#FDB209" speed={0.8} noiseIntensity={1.2} />
+        {/* Sell CTA Banner with Adapted Brand Color Gradient */}
+        <section className="mt-16 bg-gradient-to-r from-[#12151A] via-[#1E232D] to-[#12151A] text-white rounded-3xl overflow-hidden relative shadow-xl p-8 md:p-10 border border-white/10">
+          {/* Ambient Color Gradient Backdrop */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute -top-24 -right-24 w-80 h-80 bg-gradient-to-bl from-[#FDB209]/30 via-[#E98B00]/15 to-transparent rounded-full blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-gradient-to-tr from-[#FDB209]/25 via-transparent to-transparent rounded-full blur-3xl" />
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(253,178,9,0.15)_1px,transparent_1px)] [background-size:20px_20px] opacity-25" />
+          </div>
 
           <div className="relative flex flex-col md:flex-row items-center gap-8 z-10">
             <div className="flex-1 text-center md:text-left">
