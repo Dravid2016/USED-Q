@@ -27,18 +27,24 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-[#12151A] flex flex-col font-sans">
-      {/* HERO & HEADER CONTAINER - ADAPTED BRAND COLOR GRADIENT BACKGROUND & CENTERED ALIGNMENT */}
-      <div className="relative bg-gradient-to-b from-[#FFFDF2] via-[#FAFAF0] to-[#F4F1E6] text-[#12151A] overflow-hidden flex flex-col border-b border-[#E7E7E3] min-h-[calc(100vh-64px)] justify-between">
-        {/* Ambient Brand Color Gradient Accents */}
+      {/* HERO & HEADER CONTAINER - RICH BRAND GRADIENT SHADES & CENTERED ALIGNMENT */}
+      <div className="relative bg-gradient-to-br from-[#FFFCE8] via-[#FFF3D1] to-[#FCEEC7] text-[#12151A] overflow-hidden flex flex-col border-b border-[#FDB209]/30 min-h-[calc(100vh-64px)] justify-between">
+        {/* Rich Multi-Layered Brand Gradient Shades & Glow Accents */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-          {/* Radial Top-Center Golden Glow */}
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_at_top,rgba(253,178,9,0.22),transparent_70%)] pointer-events-none" />
-          {/* Top-Left Warm Gold Blob */}
-          <div className="absolute -top-20 -left-20 w-96 h-96 bg-[#FDB209]/15 rounded-full blur-3xl pointer-events-none" />
-          {/* Bottom-Right Deep Gold Ambient Glow */}
-          <div className="absolute -bottom-20 -right-20 w-[500px] h-[500px] bg-[#E98B00]/12 rounded-full blur-3xl pointer-events-none" />
+          {/* Radiant Top-Center Sunburst Glow */}
+          <div className="absolute -top-28 left-1/2 -translate-x-1/2 w-[900px] h-[650px] bg-[radial-gradient(ellipse_at_top,rgba(253,178,9,0.45),transparent_65%)] pointer-events-none" />
+          
+          {/* Top-Left Vibrant Amber Bloom */}
+          <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-br from-[#FDB209]/30 via-[#E98B00]/20 to-transparent rounded-full blur-3xl pointer-events-none" />
+          
+          {/* Bottom-Right Golden Sunrise Glow */}
+          <div className="absolute -bottom-32 -right-32 w-[600px] h-[600px] bg-gradient-to-tl from-[#FDB209]/35 via-[#FFBE24]/25 to-transparent rounded-full blur-3xl pointer-events-none" />
+          
+          {/* Center Subtle Golden Focus Aura */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#FDB209]/15 rounded-full blur-3xl pointer-events-none" />
+
           {/* Micro-Dot Brand Texture Overlay */}
-          <div className="absolute inset-0 bg-[radial-gradient(#FDB209_1.2px,transparent_1.2px)] [background-size:28px_28px] opacity-15 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(#FDB209_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
         </div>
 
         {/* Top Header */}
