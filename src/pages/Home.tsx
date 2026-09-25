@@ -26,54 +26,58 @@ export default function Home() {
   const nearby = listings.slice(4, 8);
 
   return (
-    <div className="min-h-screen bg-white text-[#12151A] flex flex-col">
-      {/* HERO & HEADER CONTAINER - CLEAN PURE WHITE BACKGROUND */}
-      <div className="relative bg-white text-[#12151A] overflow-hidden min-h-[520px] flex flex-col border-b border-[#E7E7E3]">
+    <div className="min-h-screen bg-white text-[#12151A] flex flex-col font-sans">
+      {/* HERO & HEADER CONTAINER - CLEAN PURE WHITE BACKGROUND & PERFECT ALIGNMENT */}
+      <div className="relative bg-white text-[#12151A] overflow-hidden flex flex-col border-b border-[#E7E7E3]">
         {/* Header */}
         <div className="relative z-10">
           <Header />
         </div>
 
-        {/* Hero Content */}
-        <section className="relative z-10 flex-1 flex items-center justify-center py-10 md:py-14">
-          <div className="max-w-[1320px] mx-auto px-4 lg:px-6 w-full flex flex-col items-center text-center">
-            <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
-              {/* UQ Logo Emblem (Landing Page Center Top — Transparent & Scaled) */}
-              <div className="mb-6 flex items-center justify-center cursor-pointer group" onClick={() => navigate('/')}>
+        {/* Hero Content Section */}
+        <section className="relative z-10 flex-1 flex items-center justify-center py-12 md:py-16 lg:py-20">
+          <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
+              {/* UQ Logo Emblem (Landing Page Center Top — Centered & Proportionally Scaled) */}
+              <div 
+                className="mb-5 flex items-center justify-center cursor-pointer group transition-transform duration-300 hover:scale-105" 
+                onClick={() => navigate('/')}
+              >
                 <img
                   src={uqMark}
                   alt="USED Q Logo"
-                  className="h-32 md:h-44 lg:h-52 w-auto object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                  className="h-24 sm:h-32 md:h-36 lg:h-40 w-auto object-contain drop-shadow-sm"
                 />
               </div>
 
-              {/* Badge */}
-              <div className="inline-block brand-gradient text-[#12151A] text-xs font-black px-4 py-1.5 rounded-full mb-6 shadow-md tracking-wide uppercase border border-[#FDB209]/40">
-                India's Modern Re-Commerce Marketplace
+              {/* Marketplace Badge */}
+              <div className="inline-flex items-center gap-1.5 brand-gradient text-[#12151A] text-[11px] sm:text-xs font-black px-4 py-1.5 rounded-full mb-5 shadow-sm tracking-wider uppercase border border-[#FDB209]/40">
+                <span>India's Premier Verified Marketplace</span>
               </div>
               
-              {/* Headline */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-5 tracking-tight drop-shadow-sm text-[#12151A]">
+              {/* Main Headline */}
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] mb-4 tracking-tight text-[#12151A]">
                 Buy Used. <span className="brand-gradient-text">Sell Smart.</span>
               </h1>
               
               {/* Subtitle */}
-              <p className="text-gray-600 text-lg md:text-xl mb-10 max-w-lg mx-auto font-medium leading-relaxed">
-                Find great verified products nearby or sell items you no longer need.
+              <p className="text-gray-600 text-base sm:text-lg md:text-xl mb-8 max-w-xl mx-auto font-medium leading-relaxed">
+                Find great verified products nearby or sell pre-owned items instantly.
               </p>
 
-              {/* Hero ModernSearchBar Component */}
-              <div className="w-full max-w-xl mx-auto">
+              {/* Hero Search Bar Component */}
+              <div className="w-full max-w-2xl mx-auto">
                 <ModernSearchBar initialQuery={searchQuery} variant="hero" />
               </div>
 
               {/* Quick Filter Pill Buttons */}
-              <div className="flex flex-wrap gap-2.5 mt-7 justify-center">
-                {['iPhones', 'Laptops', 'Motorcycles', 'Cameras'].map(q => (
+              <div className="flex flex-wrap gap-2 sm:gap-2.5 mt-6 justify-center items-center">
+                <span className="text-xs font-semibold text-gray-400 mr-1 hidden sm:inline">Popular:</span>
+                {['iPhones', 'Laptops', 'Motorcycles', 'Cameras', 'Tablets'].map(q => (
                   <button
                     key={q}
                     onClick={() => navigate(`/search?q=${q}`)}
-                    className="text-xs font-bold text-[#12151A] bg-white border border-[#E7E7E3] rounded-full px-4.5 py-2 hover:bg-[#FDB209] hover:border-[#FDB209] hover:text-[#12151A] transition-all shadow-sm"
+                    className="text-xs font-bold text-[#12151A] bg-[#F7F7F5] border border-[#E7E7E3] rounded-full px-4 py-1.5 hover:bg-[#FDB209] hover:border-[#FDB209] hover:text-[#12151A] transition-all shadow-2xs"
                   >
                     {q}
                   </button>
@@ -84,42 +88,47 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Stats Bar - Clean Light Mode Background */}
-      <div className="border-y border-[#E7E7E3] bg-[#F7F7F5] py-4">
-        <div className="max-w-[1320px] mx-auto px-4 lg:px-6 flex justify-around gap-6 overflow-x-auto text-center">
-          {[
-            { label: 'Active Listings', value: '14,000+' },
-            { label: 'Cities Covered', value: '50+' },
-            { label: 'Happy Sellers', value: '8,400+' },
-            { label: 'Deals Closed', value: '32,000+' },
-          ].map(stat => (
-            <div key={stat.label} className="shrink-0 px-4">
-              <div className="text-2xl font-black text-[#FDB209] tracking-tight">{stat.value}</div>
-              <div className="text-xs font-medium text-gray-500 mt-0.5">{stat.label}</div>
-            </div>
-          ))}
+      {/* Stats Bar - Perfectly Balanced Grid Alignment */}
+      <div className="border-b border-[#E7E7E3] bg-[#F7F7F5] py-5">
+        <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center divide-x-0 md:divide-x divide-[#E7E7E3]">
+            {[
+              { label: 'Active Listings', value: '14,000+' },
+              { label: 'Cities Covered', value: '50+' },
+              { label: 'Happy Sellers', value: '8,400+' },
+              { label: 'Deals Closed', value: '32,000+' },
+            ].map(stat => (
+              <div key={stat.label} className="flex flex-col items-center justify-center p-2">
+                <div className="text-2xl sm:text-3xl font-black text-[#FDB209] tracking-tight">{stat.value}</div>
+                <div className="text-xs font-semibold text-gray-500 mt-1 uppercase tracking-wider">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Main Body Content - Clean Light Background for Perfect Product Card Contrast */}
-      <main className="max-w-[1320px] mx-auto px-4 lg:px-6 pb-24 md:pb-16 w-full flex-1">
-        {/* Categories */}
-        <section className="mt-10">
+      {/* Main Body Content */}
+      <main className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pb-24 md:pb-16 w-full flex-1">
+        {/* Popular Categories */}
+        <section className="mt-12">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-[#12151A] tracking-tight">Popular Categories</h2>
-            <Link to="/categories" className="text-sm font-semibold text-[#FDB209] hover:underline">View all</Link>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#12151A] tracking-tight">Popular Categories</h2>
+              <p className="text-xs sm:text-sm text-gray-500">Explore products by category</p>
+            </div>
+            <Link to="/categories" className="text-xs sm:text-sm font-bold text-[#FDB209] hover:underline">View all</Link>
           </div>
-          <div className="grid grid-cols-5 md:grid-cols-10 gap-3">
+          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 gap-3">
             {categories.map(cat => (
               <Link
                 key={cat.id}
                 to={`/search?category=${cat.id}`}
-                className="flex flex-col items-center gap-2.5 group p-3 rounded-2xl bg-[#F7F7F5] border border-[#E7E7E3] hover:border-[#FDB209] hover:bg-[#FDB209]/10 transition-all duration-200 shadow-sm hover:-translate-y-1"
+                className="flex flex-col items-center gap-2 group p-3 rounded-2xl bg-[#F7F7F5] border border-[#E7E7E3] hover:border-[#FDB209] hover:bg-[#FDB209]/10 transition-all duration-200 shadow-2xs hover:-translate-y-0.5"
               >
-                <div className="w-12 h-12 md:w-13 md:h-13 bg-white rounded-full flex items-center justify-center text-gray-700 group-hover:text-[#FDB209] transition-colors shadow-sm">
-                  <CategoryIcon id={cat.id} className="w-5 h-5 md:w-6 md:h-6" />
+                <div className="w-11 h-11 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center text-gray-700 group-hover:text-[#FDB209] transition-colors shadow-2xs">
+                  <CategoryIcon id={cat.id} className="w-5 h-5" />
                 </div>
-                <span className="text-[10px] md:text-xs font-semibold text-[#12151A] text-center leading-tight">{cat.name}</span>
+                <span className="text-[11px] font-semibold text-[#12151A] text-center leading-tight truncate w-full">{cat.name}</span>
               </Link>
             ))}
           </div>
@@ -129,12 +138,12 @@ export default function Home() {
         <section className="mt-14">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-[#12151A] tracking-tight">Recommended For You</h2>
-              <p className="text-sm text-gray-500">Handpicked items based on your browsing</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#12151A] tracking-tight">Recommended For You</h2>
+              <p className="text-xs sm:text-sm text-gray-500">Handpicked items based on your browsing</p>
             </div>
-            <Link to="/search" className="text-sm font-semibold text-[#FDB209] hover:underline">See all</Link>
+            <Link to="/search" className="text-xs sm:text-sm font-bold text-[#FDB209] hover:underline">See all</Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {loading
               ? Array(4).fill(0).map((_, i) => <ProductCardSkeleton key={i} />)
               : recommended.map(l => <ProductCard key={l.id} listing={l} />)
@@ -146,36 +155,34 @@ export default function Home() {
         <section className="mt-14">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-[#12151A] tracking-tight">Recently Added</h2>
-              <p className="text-sm text-gray-500">Fresh listings just posted</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#12151A] tracking-tight">Recently Added</h2>
+              <p className="text-xs sm:text-sm text-gray-500">Fresh listings just posted</p>
             </div>
-            <Link to="/search?sort=newest" className="text-sm font-semibold text-[#FDB209] hover:underline">See all</Link>
+            <Link to="/search?sort=newest" className="text-xs sm:text-sm font-bold text-[#FDB209] hover:underline">See all</Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {recent.map(l => <ProductCard key={l.id} listing={l} />)}
           </div>
         </section>
 
-        {/* Sell CTA Banner with Adapted Brand Color Gradient */}
-        <section className="mt-16 bg-gradient-to-r from-[#12151A] via-[#1E232D] to-[#12151A] text-white rounded-3xl overflow-hidden relative shadow-xl p-8 md:p-10 border border-white/10">
-          {/* Ambient Color Gradient Backdrop */}
+        {/* Sell CTA Banner */}
+        <section className="mt-16 bg-[#12151A] text-white rounded-3xl overflow-hidden relative shadow-xl p-6 sm:p-10 border border-white/10">
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute -top-24 -right-24 w-80 h-80 bg-gradient-to-bl from-[#FDB209]/30 via-[#E98B00]/15 to-transparent rounded-full blur-3xl" />
-            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-gradient-to-tr from-[#FDB209]/25 via-transparent to-transparent rounded-full blur-3xl" />
-            <div className="absolute inset-0 bg-[radial-gradient(rgba(253,178,9,0.15)_1px,transparent_1px)] [background-size:20px_20px] opacity-25" />
+            <div className="absolute -top-24 -right-24 w-80 h-80 bg-[#FDB209]/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#FDB209]/15 rounded-full blur-3xl" />
           </div>
 
-          <div className="relative flex flex-col md:flex-row items-center gap-8 z-10">
-            <div className="flex-1 text-center md:text-left">
-              <h2 className="text-2xl md:text-4xl font-black text-white mb-3">
+          <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8 z-10">
+            <div className="flex-1 text-center lg:text-left">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-3">
                 Got something to sell?
               </h2>
-              <p className="text-gray-400 text-base mb-6 max-w-lg leading-relaxed">
+              <p className="text-gray-400 text-sm sm:text-base mb-6 max-w-lg leading-relaxed mx-auto lg:mx-0">
                 Post your listing in minutes and reach thousands of buyers near you — completely free.
               </p>
               <Link
                 to="/sell"
-                className="inline-flex items-center gap-2 brand-gradient text-[#12151A] font-extrabold text-base px-8 py-3.5 rounded-full hover:opacity-90 transition-opacity shadow-lg"
+                className="inline-flex items-center gap-2 brand-gradient text-[#12151A] font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-full hover:opacity-95 transition-opacity shadow-lg"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
@@ -183,11 +190,11 @@ export default function Home() {
                 Start Selling Now
               </Link>
             </div>
-            <div className="flex flex-wrap md:flex-nowrap gap-4 text-center justify-center">
+            <div className="flex flex-wrap sm:flex-nowrap gap-3 sm:gap-4 text-center justify-center w-full lg:w-auto">
               {[['Free', 'Always free to post'], ['Fast', 'Live in minutes'], ['Local', 'Reach nearby buyers']].map(([t, s]) => (
-                <div key={t} className="bg-white/10 rounded-2xl px-5 py-4 min-w-[110px]">
-                  <div className="text-2xl font-black brand-gradient-text">{t}</div>
-                  <div className="text-[11px] text-gray-400 mt-1">{s}</div>
+                <div key={t} className="bg-white/10 backdrop-blur-xs rounded-2xl px-5 py-4 flex-1 sm:flex-initial min-w-[110px]">
+                  <div className="text-xl sm:text-2xl font-black brand-gradient-text">{t}</div>
+                  <div className="text-[11px] text-gray-400 mt-1 font-medium">{s}</div>
                 </div>
               ))}
             </div>
@@ -198,20 +205,23 @@ export default function Home() {
         <section className="mt-14">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-[#12151A] tracking-tight">Popular Near You</h2>
-              <p className="text-sm text-gray-500">Chennai & nearby areas</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#12151A] tracking-tight">Popular Near You</h2>
+              <p className="text-xs sm:text-sm text-gray-500">Chennai & nearby areas</p>
             </div>
-            <Link to="/search?near=true" className="text-sm font-semibold text-[#FDB209] hover:underline">See all</Link>
+            <Link to="/search?near=true" className="text-xs sm:text-sm font-bold text-[#FDB209] hover:underline">See all</Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {nearby.map(l => <ProductCard key={l.id} listing={l} />)}
           </div>
         </section>
 
         {/* Trust & Safety Cards */}
         <section className="mt-16">
-          <h2 className="text-2xl font-bold text-[#12151A] mb-8 text-center tracking-tight">Trust & Safety</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="text-center max-w-xl mx-auto mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#12151A] tracking-tight">Trust & Safety First</h2>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">We build features to keep your buying and selling experience secure</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {[
               { icon: CheckCircle2, title: 'Verified Users', desc: 'Profile verification builds trust between buyers and sellers.', color: 'text-emerald-600 bg-emerald-50' },
               { icon: ShieldCheck, title: 'Safe Communication', desc: 'Chat within the platform. Never share personal contact directly.', color: 'text-blue-600 bg-blue-50' },
@@ -220,8 +230,8 @@ export default function Home() {
             ].map(item => {
               const IconComponent = item.icon;
               return (
-                <div key={item.title} className="bg-[#F7F7F5] border border-[#E7E7E3] rounded-2xl p-5 text-center flex flex-col items-center hover:shadow-md transition-shadow">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${item.color}`}>
+                <div key={item.title} className="bg-[#F7F7F5] border border-[#E7E7E3] rounded-2xl p-5 text-center flex flex-col items-center hover:shadow-sm transition-shadow">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3.5 ${item.color}`}>
                     <IconComponent className="w-6 h-6" />
                   </div>
                   <h3 className="font-bold text-[#12151A] text-sm mb-1.5">{item.title}</h3>
