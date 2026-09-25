@@ -35,14 +35,16 @@ export default function Header({ searchQuery = '', dark = false, transparent = f
             <img src={logo} alt="UsedQ — Buy, Sell, Trade" className="h-7 md:h-8 w-auto object-contain" />
           </Link>
 
-          {/* Location Picker & SearchBar Group near Right Side */}
+          {/* Header Search Bar */}
+          {!hideSearch && (
+            <div className="hidden md:flex flex-1 max-w-sm lg:max-w-md mx-3">
+              <ModernSearchBar initialQuery={searchQuery} dark={dark} variant="header" />
+            </div>
+          )}
+
+          {/* Location Picker & Nav Group near Right Side */}
           <div className="hidden md:flex items-center gap-2.5 ml-auto justify-end">
             <LocationPicker dark={dark} />
-            {!hideSearch && (
-              <div className="flex-1 max-w-sm lg:max-w-md">
-                <ModernSearchBar initialQuery={searchQuery} dark={dark} variant="header" />
-              </div>
-            )}
           </div>
 
           {/* Nav actions */}

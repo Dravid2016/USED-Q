@@ -49,7 +49,7 @@ export default function Home() {
 
         {/* Top Header */}
         <div className="relative z-10">
-          <Header transparent hideSearch />
+          <Header transparent />
         </div>
 
         {/* Hero Content Section - Perfectly Centered in First Slide */}
