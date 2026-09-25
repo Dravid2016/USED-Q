@@ -7,9 +7,10 @@ interface HeaderProps {
   searchQuery?: string;
   dark?: boolean;
   transparent?: boolean;
+  hideSearch?: boolean;
 }
 
-export default function Header({ searchQuery = '', dark = false, transparent = false }: HeaderProps) {
+export default function Header({ searchQuery = '', dark = false, transparent = false, hideSearch = false }: HeaderProps) {
   const headerBgClass = transparent
     ? dark
       ? 'bg-transparent text-white border-b border-transparent shadow-none'
@@ -31,11 +32,13 @@ export default function Header({ searchQuery = '', dark = false, transparent = f
           </Link>
 
           {/* Location Picker & SearchBar Group near Right Side */}
-          <div className="hidden md:flex items-center gap-2.5 ml-auto flex-1 max-w-md lg:max-w-xl justify-end">
+          <div className="hidden md:flex items-center gap-2.5 ml-auto justify-end">
             <LocationPicker dark={dark} />
-            <div className="flex-1 max-w-sm lg:max-w-md">
-              <ModernSearchBar initialQuery={searchQuery} dark={dark} variant="header" />
-            </div>
+            {!hideSearch && (
+              <div className="flex-1 max-w-sm lg:max-w-md">
+                <ModernSearchBar initialQuery={searchQuery} dark={dark} variant="header" />
+              </div>
+            )}
           </div>
 
           {/* Nav actions */}

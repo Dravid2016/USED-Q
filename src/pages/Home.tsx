@@ -27,31 +27,40 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-[#12151A] flex flex-col font-sans">
-      {/* HERO & HEADER CONTAINER - CLEAN PURE WHITE BACKGROUND & PERFECT ALIGNMENT */}
-      <div className="relative bg-white text-[#12151A] overflow-hidden flex flex-col border-b border-[#E7E7E3]">
-        {/* Header */}
+      {/* HERO & HEADER CONTAINER - FIRST SLIDE CENTERED ALIGNMENT */}
+      <div className="relative bg-white text-[#12151A] overflow-hidden flex flex-col border-b border-[#E7E7E3] min-h-[calc(100vh-64px)] justify-between">
+        {/* Top Header */}
         <div className="relative z-10">
-          <Header />
+          <Header hideSearch />
         </div>
 
-        {/* Hero Content Section */}
-        <section className="relative z-10 flex-1 flex items-center justify-center py-12 md:py-16 lg:py-20">
-          <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Hero Content Section - Perfectly Centered in First Slide */}
+        <section className="relative z-10 flex-1 flex flex-col justify-center items-center py-10 sm:py-14 lg:py-16">
+          <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center">
             <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
-              {/* UQ Logo Emblem (Landing Page Center Top — Centered & Proportionally Scaled) */}
+              
+              {/* Centered Logo Emblem & Brand Text */}
               <div 
-                className="mb-5 flex items-center justify-center cursor-pointer group transition-transform duration-300 hover:scale-105" 
+                className="mb-6 flex flex-col sm:flex-row items-center justify-center gap-3 cursor-pointer group transition-transform duration-300 hover:scale-105" 
                 onClick={() => navigate('/')}
               >
                 <img
                   src={uqMark}
-                  alt="USED Q Logo"
-                  className="h-24 sm:h-32 md:h-36 lg:h-40 w-auto object-contain drop-shadow-sm"
+                  alt="USED Q Logo Emblem"
+                  className="h-20 sm:h-28 md:h-32 w-auto object-contain drop-shadow-sm"
                 />
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#12151A] leading-none">
+                    USED <span className="text-[#FDB209]">Q</span>
+                  </span>
+                  <span className="text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">
+                    E-Commerce Marketplace
+                  </span>
+                </div>
               </div>
 
               {/* Marketplace Badge */}
-              <div className="inline-flex items-center gap-1.5 brand-gradient text-[#12151A] text-[11px] sm:text-xs font-black px-4 py-1.5 rounded-full mb-5 shadow-sm tracking-wider uppercase border border-[#FDB209]/40">
+              <div className="inline-flex items-center gap-1.5 brand-gradient text-[#12151A] text-[11px] sm:text-xs font-black px-4.5 py-1.5 rounded-full mb-6 shadow-sm tracking-wider uppercase border border-[#FDB209]/40">
                 <span>India's Premier Verified Marketplace</span>
               </div>
               
@@ -67,12 +76,12 @@ export default function Home() {
 
               {/* Hero Search Bar Component */}
               <div className="w-full max-w-2xl mx-auto">
-                <ModernSearchBar initialQuery={searchQuery} variant="hero" />
+                <ModernSearchBar initialQuery={searchQuery} variant="hero" showLocation={true} />
               </div>
 
               {/* Quick Filter Pill Buttons */}
-              <div className="flex flex-wrap gap-2 sm:gap-2.5 mt-6 justify-center items-center">
-                <span className="text-xs font-semibold text-gray-400 mr-1 hidden sm:inline">Popular:</span>
+              <div className="flex flex-wrap gap-2 sm:gap-2.5 mt-7 justify-center items-center">
+                <span className="text-xs font-semibold text-gray-400 mr-1 hidden sm:inline">Popular Searches:</span>
                 {['iPhones', 'Laptops', 'Motorcycles', 'Cameras', 'Tablets'].map(q => (
                   <button
                     key={q}
@@ -83,6 +92,7 @@ export default function Home() {
                   </button>
                 ))}
               </div>
+
             </div>
           </div>
         </section>

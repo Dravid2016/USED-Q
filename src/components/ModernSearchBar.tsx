@@ -50,10 +50,10 @@ export default function ModernSearchBar({
       onSubmit={handleSearch}
       className={`relative flex items-center rounded-full transition-all border ${
         isHero
-          ? 'bg-white/10 backdrop-blur-xl border-white/20 p-2 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] focus-within:border-[#FDB209] focus-within:bg-white/15'
+          ? 'bg-white border border-[#E7E7E3] p-1.5 sm:p-2 shadow-xl hover:shadow-2xl focus-within:border-[#FDB209] focus-within:ring-4 focus-within:ring-[#FDB209]/20'
           : dark
           ? 'bg-white/10 backdrop-blur-md border-white/15 p-1 shadow-lg focus-within:border-[#FDB209]/80 focus-within:bg-white/15'
-          : 'bg-white/60 backdrop-blur-md border-white/60 p-1 shadow-lg focus-within:border-[#FDB209]/80 focus-within:bg-white/80'
+          : 'bg-white/80 backdrop-blur-md border-[#E7E7E3] p-1 shadow-md focus-within:border-[#FDB209]/80 focus-within:bg-white'
       } ${className}`}
     >
       {/* Location Badge Pill Dropdown - Only if showLocation is true */}
@@ -64,9 +64,9 @@ export default function ModernSearchBar({
               type="button"
               onClick={() => setIsCityOpen(!isCityOpen)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
-                dark || isHero
+                dark
                   ? 'bg-white/15 backdrop-blur-md text-gray-100 hover:bg-white/25 border border-white/20'
-                  : 'bg-white/70 backdrop-blur-md text-[#12151A] hover:bg-white/90 border border-gray-200/60 shadow-sm'
+                  : 'bg-[#F7F7F5] text-[#12151A] hover:bg-gray-200/80 border border-gray-200 shadow-2xs'
               }`}
             >
               <MapPin className="w-3.5 h-3.5 text-[#FDB209] shrink-0" />
@@ -77,9 +77,9 @@ export default function ModernSearchBar({
             {isCityOpen && (
               <div
                 className={`absolute top-full left-0 mt-2 w-44 rounded-2xl p-1.5 shadow-2xl border z-50 backdrop-blur-2xl ${
-                  dark || isHero
+                  dark
                     ? 'bg-[#14171C]/85 border-white/20 text-white'
-                    : 'bg-white/85 border-white/40 text-[#12151A]'
+                    : 'bg-white/95 border-gray-200 text-[#12151A]'
                 }`}
               >
                 {CITIES.map((city) => (
@@ -93,7 +93,7 @@ export default function ModernSearchBar({
                     className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-colors flex items-center justify-between ${
                       selectedCity === city
                         ? 'bg-[#FDB209] text-[#12151A] font-extrabold shadow-sm'
-                        : dark || isHero
+                        : dark
                         ? 'hover:bg-white/15 text-gray-200'
                         : 'hover:bg-black/5 text-[#12151A]'
                     }`}
@@ -107,12 +107,12 @@ export default function ModernSearchBar({
           </div>
 
           {/* Segment Divider */}
-          <div className={`h-5 w-px mx-2 ${dark || isHero ? 'bg-white/20' : 'bg-gray-300/60'}`} />
+          <div className={`h-5 w-px mx-2 ${dark ? 'bg-white/20' : 'bg-gray-300/60'}`} />
         </>
       ) : (
         /* Left Search Icon when Location Pill is removed */
         <div className="pl-3.5 pr-1 flex items-center justify-center text-gray-400 shrink-0">
-          <Search className="w-4 h-4 md:w-5 md:h-5 stroke-[2]" />
+          <Search className="w-4 h-4 md:w-5 md:h-5 stroke-[2] text-[#FDB209]" />
         </div>
       )}
 
@@ -122,10 +122,10 @@ export default function ModernSearchBar({
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={isHero ? 'Search phones, bikes, laptops...' : 'Search items nearby...'}
+          placeholder={isHero ? 'Search phones, bikes, laptops, electronics...' : 'Search items nearby...'}
           className={`w-full bg-transparent outline-none font-medium placeholder:text-gray-400 ${
-            isHero ? 'py-2 text-base text-white' : 'py-1 text-sm'
-          } ${dark || isHero ? 'text-white' : 'text-[#12151A]'}`}
+            isHero ? 'py-2 px-1 text-base sm:text-lg text-[#12151A]' : 'py-1 text-sm text-[#12151A]'
+          } ${dark ? 'text-white' : 'text-[#12151A]'}`}
         />
         {query && (
           <button
