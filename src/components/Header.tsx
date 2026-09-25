@@ -46,18 +46,6 @@ export default function Header({ searchQuery = '', dark = false, transparent = f
               <img src={logo} alt="UsedQ — Buy, Sell, Trade" className="h-7 md:h-8 w-auto object-contain" />
             </Link>
 
-            {/* Header Categories Button */}
-            <button
-              onClick={() => setShowCategoryMenu(true)}
-              className={`hidden lg:flex items-center gap-1.5 px-3.5 py-2 rounded-xl border text-xs font-bold transition-all shrink-0 ${
-                dark
-                  ? 'border-gray-700 bg-white/10 text-white hover:bg-white/20'
-                  : 'border-[#E7E7E3] bg-[#F7F7F5] text-[#12151A] hover:border-[#FDB209] hover:bg-white'
-              }`}
-            >
-              <Grid className="w-4 h-4 text-[#FDB209]" />
-              <span>Categories ☰</span>
-            </button>
 
             {/* Location Picker */}
             <div className="hidden md:flex items-center shrink-0">
@@ -113,15 +101,8 @@ export default function Header({ searchQuery = '', dark = false, transparent = f
               </Link>
             </div>
 
-            {/* Mobile search icon + category menu */}
+            {/* Mobile search icon + notifications */}
             <div className="flex md:hidden items-center gap-2 ml-auto">
-              <button
-                onClick={() => setShowCategoryMenu(true)}
-                className={`p-2 rounded-full ${dark ? 'text-white hover:bg-white/10' : 'text-[#12151A] hover:bg-black/5'}`}
-                title="Category Menu"
-              >
-                <Grid className="w-5 h-5 text-[#FDB209]" />
-              </button>
               <Link to="/search" className={`p-2 rounded-full ${dark ? 'text-white hover:bg-white/10' : 'text-[#12151A] hover:bg-black/5'}`}>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
