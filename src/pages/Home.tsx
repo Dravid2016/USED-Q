@@ -9,7 +9,7 @@ import CategoryIcon from '../components/CategoryIcon';
 import { ShieldCheck, CheckCircle2, Flag, Users } from 'lucide-react';
 
 import ModernSearchBar from '../components/ModernSearchBar';
-import logo from '../assets/logo.png';
+import uqMark from '../assets/uq-logo-mark.png';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -57,16 +57,24 @@ export default function Home() {
           <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center">
             <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
               
-              {/* Centered Main Logo Image (Official Attached UsedQ Logo) */}
+              {/* Centered Logo Emblem & Brand Text */}
               <div 
-                className="mb-6 flex items-center justify-center cursor-pointer group transition-transform duration-300 hover:scale-105" 
+                className="mb-6 flex flex-col sm:flex-row items-center justify-center gap-3 cursor-pointer group transition-transform duration-300 hover:scale-105" 
                 onClick={() => navigate('/')}
               >
                 <img
-                  src={logo}
-                  alt="UsedQ — Buy, Sell, Trade"
-                  className="h-20 sm:h-28 md:h-36 lg:h-40 w-auto object-contain mix-blend-multiply drop-shadow-sm"
+                  src={uqMark}
+                  alt="USED Q Logo Emblem"
+                  className="h-20 sm:h-28 md:h-32 w-auto object-contain drop-shadow-sm"
                 />
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#12151A] leading-none">
+                    USED <span className="text-[#FDB209]">Q</span>
+                  </span>
+                  <span className="text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">
+                    E-Commerce Marketplace
+                  </span>
+                </div>
               </div>
 
               {/* Marketplace Badge */}
